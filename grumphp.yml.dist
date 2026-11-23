@@ -6,12 +6,15 @@ grumphp:
     tasks:
         composer:
             strict: true
-        composer_require_checker: ~
         phpcsfixer2:
             allow_risky: true
             config: .php-cs-fixer.php
         phpstan:
             configuration: phpstan.neon
+            memory_limit: 768M
+            # Analyse the paths from phpstan.neon, not the staged files. phpstan.neon excludes tests,
+            # so staging only tests or config files would fail with "No files found".
+            use_grumphp_paths: false
         phpunit:
             metadata:
                 priority: 100
