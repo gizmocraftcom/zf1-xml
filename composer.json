@@ -1,5 +1,5 @@
 {
-    "name": "diablomedia/zendframework1-xml",
+    "name": "gizmocraft/zendframework1-xml",
     "description": "Zend Framework 1 XML component",
     "type": "library",
     "keywords": [
@@ -9,12 +9,18 @@
     "homepage": "http://framework.zend.com/",
     "license": "BSD-3-Clause",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/gizmocraftcom/zf1-exception"
+        }
+    ],
     "require": {
-        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+        "php": ">=8.5",
         "ext-dom": "*",
         "ext-libxml": "*",
         "ext-SimpleXML": "*",
-        "diablomedia/zendframework1-exception": "^1.1.1"
+        "gizmocraft/zendframework1-exception": "^2.0.0"
     },
     "autoload": {
         "psr-0": {
