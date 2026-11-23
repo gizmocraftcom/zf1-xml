@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +29,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Xml
- * @group      ZF2015-06
  */
+#[Group('Zend_Xml')]
+#[Group('ZF2015-06')]
 class Zend_Xml_MultibyteTest extends PHPUnit\Framework\TestCase
 {
     public static function multibyteEncodings()
@@ -67,10 +69,8 @@ XML;
         Zend_Xml_TestAsset_Security::heuristicScan($xml);
     }
 
-    /**
-     * @dataProvider multibyteEncodings
-     * @group heuristicDetection
-     */
+    #[DataProvider('multibyteEncodings')]
+    #[Group('heuristicDetection')]
     public function testDetectsMultibyteXXEVectorsUnderFPMWithEncodedStringMissingBOM($encoding, $bom, $bomLength)
     {
         $xml = $this->getXmlWithXXE();
@@ -82,10 +82,8 @@ XML;
         $this->invokeHeuristicScan($xml);
     }
 
-    /**
-     * @dataProvider multibyteEncodings
-     */
-    public function testDetectsMultibyteXXEVectorsUnderFPMWithEncodedStringUsingBOM($encoding, $bom)
+    #[DataProvider('multibyteEncodings')]
+    public function testDetectsMultibyteXXEVectorsUnderFPMWithEncodedStringUsingBOM($encoding, $bom, $bomLength)
     {
         $xml  = $this->getXmlWithXXE();
         $xml  = str_replace('{ENCODING}', $encoding, $xml);
@@ -106,10 +104,8 @@ XML;
 XML;
     }
 
-    /**
-     * @dataProvider multibyteEncodings
-     */
-    public function testDoesNotFlagValidMultibyteXmlAsInvalidUnderFPM($encoding)
+    #[DataProvider('multibyteEncodings')]
+    public function testDoesNotFlagValidMultibyteXmlAsInvalidUnderFPM($encoding, $bom, $bomLength)
     {
         $xml = $this->getXmlWithoutXXE();
         $xml = str_replace('{ENCODING}', $encoding, $xml);
@@ -122,11 +118,9 @@ XML;
         }
     }
 
-    /**
-     * @dataProvider multibyteEncodings
-     * @group mixedEncoding
-     */
-    public function testDetectsXXEWhenXMLDocumentEncodingDiffersFromFileEncoding($encoding, $bom)
+    #[DataProvider('multibyteEncodings')]
+    #[Group('mixedEncoding')]
+    public function testDetectsXXEWhenXMLDocumentEncodingDiffersFromFileEncoding($encoding, $bom, $bomLength)
     {
         $xml = $this->getXmlWithXXE();
         $xml = str_replace('{ENCODING}', 'UTF-8', $xml);
