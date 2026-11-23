@@ -18,6 +18,8 @@ return $config->setRiskyAllowed(true)
         'psr_autoloading'           => array('dir' => 'src'),
         'short_scalar_cast'         => true,
     ))
+    // php-cs-fixer does not yet support PHP 8.6 syntax and aborts there; allow it until a release supports 8.6.
+    ->setUnsupportedPhpVersionAllowed(true)
     ->setUsingCache(true)
     ->setFinder($finder);
 ;
