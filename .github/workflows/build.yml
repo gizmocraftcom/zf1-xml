@@ -24,7 +24,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring
-          coverage: pcov
+          coverage: none
           tools: cs2pr
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
@@ -47,9 +47,4 @@ jobs:
           PHP_CS_FIXER_IGNORE_ENV: true
         run: composer style-check -- --format=checkstyle | cs2pr
       - name: Test
-        run: composer test-with-coverage
-      - name: Upload Coverage
-        uses: codecov/codecov-action@v7
-        with:
-          files: ./clover.xml
-          verbose: true
+        run: composer test
