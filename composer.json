@@ -9,12 +9,6 @@
     "homepage": "http://framework.zend.com/",
     "license": "BSD-3-Clause",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/gizmocraftcom/zf1-exception"
-        }
-    ],
     "require": {
         "php": ">=8.5",
         "ext-dom": "*",
